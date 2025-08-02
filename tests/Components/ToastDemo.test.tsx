@@ -15,7 +15,7 @@ describe("ToastDemo", () => {
     const button = screen.getByRole("button");
 
     const user = userEvent.setup();
-      await user.click(button);
-      screen.findByText(/success/i)
+    await user.click(button);
+    screen.findByText(/success/i);
   });
 });
