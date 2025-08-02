@@ -2,8 +2,8 @@ import { render, screen } from "@testing-library/react";
 import UserList from "../../src/components/UserList";
 import type { User } from "../../src/entities";
 
-describe("USerList", () => {
-  it("should render a list", () => {
+describe("UserList", () => {
+  it("should display a message when list is empty", () => {
     render(<UserList users={[]} />);
     expect(screen.getByText(/no users/i)).toBeInTheDocument();
   });
