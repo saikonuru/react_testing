@@ -26,7 +26,7 @@ describe("group", () => {
     expect(onChange).toHaveBeenCalledWith(searchTerm);
   });
 
-  it("should npt call onChange if input field ois empty", async () => {
+  it("should not call onChange if input field is empty", async () => {
     const { input, user, onChange } = renderComponent();
     expect(input).toBeInTheDocument();
 
