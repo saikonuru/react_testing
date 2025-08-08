@@ -16,6 +16,6 @@ describe("ToastDemo", () => {
 
     const user = userEvent.setup();
     await user.click(button);
-    screen.findByText(/success/i);
+    await screen.findByText(/success/i);
   });
 });

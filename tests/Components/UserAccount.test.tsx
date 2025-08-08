@@ -15,7 +15,7 @@ describe("User Account", () => {
 
     expect(screen.getByText(user.name)).toBeInTheDocument();
   });
-  it("shoud display enable edit button if user is admin", () => {
+  it("should display enable edit button if user is admin", () => {
     render(<UserAccount user={user} />);
 
     const button = screen.getByRole("button"); // getByRole
@@ -23,7 +23,7 @@ describe("User Account", () => {
     expect(button).toHaveTextContent(/edit/i);
   });
 
-  it("shoud not display edit button if user is not admin", () => {
+  it("should not display edit button if user is not admin", () => {
     user.isAdmin = false;
     render(<UserAccount user={user} />);
     const button = screen.queryByRole("button"); //queryByRole
