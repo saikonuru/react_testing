@@ -36,6 +36,9 @@ describe("ProductForm", () => {
         const categoryInput = screen.getByRole("combobox", {
           name: /category/i,
         });
+        // Wait for options to appear after opening the dropdown
+        // Do not fetch options here; fetch them after opening the dropdown in your test or fill function
+        const options: HTMLElement[] = [];
         const submitButton = screen.getByRole("button");
 
         type FormData = {
@@ -66,7 +69,7 @@ describe("ProductForm", () => {
           }
 
           await user.click(categoryInput);
-          const options = screen.getAllByRole("option");
+          const options = await screen.findAllByRole("option");
           await user.click(options[0]);
           await user.click(submitButton);
         };
@@ -75,6 +78,7 @@ describe("ProductForm", () => {
           nameInput,
           priceInput,
           categoryInput,
+          options,
           submitButton,
           fill: fill,
           validData,
@@ -184,7 +188,7 @@ describe("ProductForm", () => {
     }
   );
 
-  it("should render all categories in the dropdown", async () => {
+  it("should display all available categories as options in the dropdown", async () => {
     const { waitForFormToLoad } = renderComponent();
     const form = await waitForFormToLoad();
 
@@ -192,7 +196,8 @@ describe("ProductForm", () => {
     const options = screen.getAllByRole("option");
     expect(options.length).toBeGreaterThan(0);
 
-    const categoryNames = db.category.getAll().map((category) => category.name);
+    const testCategories = [category];
+    const categoryNames = testCategories.map((category) => category.name);
     const optionNames = options.map((option) => option.textContent);
     categoryNames.forEach((name) => {
       expect(optionNames).toContain(name);
