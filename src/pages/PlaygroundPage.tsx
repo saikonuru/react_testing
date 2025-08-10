@@ -1,7 +1,7 @@
-import BrowseProductsPage from "./BrowseProductsPage";
+import ProductForm from "../components/ProductForm";
 
 const PlaygroundPage = () => {
-  return <BrowseProductsPage />;
+  return <ProductForm />;
 };
 
 export default PlaygroundPage;
