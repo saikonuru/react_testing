@@ -5,7 +5,6 @@ export type User = {
 };
 
 export type Category = {
-  categoryId: number;
   id: number;
   name: string;
 };

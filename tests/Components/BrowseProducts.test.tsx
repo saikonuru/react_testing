@@ -89,7 +89,7 @@ describe("BrowseProducts", () => {
     const combobox = getCategoriesCombobox();
     expect(combobox).toBeInTheDocument();
     const user = userEvent.setup();
-    await user.click(combobox);
+    await user.click(combobox!);
 
     const options = await screen.findAllByRole("option");
     expect(options.length).toBeGreaterThan(0);
