@@ -30,13 +30,17 @@ describe("ProductDetail", () => {
     });
 
     expect(
-      await screen.findByText(new RegExp(product!.name))
+      await screen.findByRole("heading", { name: /detail/i })
     ).toBeInTheDocument();
 
+    expect(
+      await screen.findByText(new RegExp(product!.name))
+    ).toBeInTheDocument();
     expect(
       await screen.findByText(new RegExp(product!.price.toString()))
     ).toBeInTheDocument();
   });
+
   it("should render a message if product is not found", async () => {
     server.use(http.get("/products/1", () => HttpResponse.json(null)));
     render(<ProductDetail productId={1} />, { wrapper: AllProviders });
@@ -56,7 +60,7 @@ describe("ProductDetail", () => {
     expect(message).toBeInTheDocument();
   });
 
-  it("should render a loading indicator when featching data", async () => {
+  it("should render a loading indicator when fetching data", async () => {
     server.use(
       http.get("/products/1", async () => {
         await delay();
@@ -69,13 +73,13 @@ describe("ProductDetail", () => {
     expect(message).toBeInTheDocument();
   });
 
-  it("should remove loading indicator after featching data", async () => {
+  it("should remove loading indicator after fetching data", async () => {
     render(<ProductDetail productId={1} />, { wrapper: AllProviders });
 
     await waitForElementToBeRemoved(() => screen.queryByText(/loading/i));
   });
 
-  it("should remove loading indicator if data featching fails", async () => {
+  it("should remove loading indicator if data fetching fails", async () => {
     server.use(http.get("/products/1", () => HttpResponse.error()));
     render(<ProductDetail productId={1} />, { wrapper: AllProviders });
     await waitForElementToBeRemoved(() => screen.queryByText(/loading/i));

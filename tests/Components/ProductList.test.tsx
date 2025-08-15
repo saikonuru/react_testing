@@ -44,7 +44,7 @@ describe("ProductList", () => {
     expect(message).toBeInTheDocument();
   });
 
-  it("should render a loading indicator when featching data", async () => {
+  it("should render a loading indicator when fetching data", async () => {
     server.use(
       http.get("/products", async () => {
         await delay();
@@ -57,13 +57,13 @@ describe("ProductList", () => {
     expect(message).toBeInTheDocument();
   });
 
-  it("should remove loading indicator after featching data", async () => {
+  it("should remove loading indicator after fetching data", async () => {
     render(<ProductList />, { wrapper: AllProviders });
 
     await waitForElementToBeRemoved(() => screen.queryByText(/loading/i));
   });
 
-  it("should remove loading indicator if data featching fails", async () => {
+  it("should remove loading indicator if data fetching fails", async () => {
     server.use(http.get("/products", () => HttpResponse.error()));
     render(<ProductList />, { wrapper: AllProviders });
 
